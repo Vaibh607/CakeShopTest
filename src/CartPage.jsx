@@ -738,7 +738,7 @@ const CartPage = ({switchPage,wishlist,toggleWishlist,cart,toggleCart,updateCart
                 Click on <span> Download PDF Button </span>to download your order summary and send this to us on <a href="https://wa.me/7992419378/">Whatsapp: +91 7992419378 </a>
             </div>
             
-            <button className={`${acceptTnC && confirmDetails ? "download-pdf-btn" : "download-pdf-btn-disabled"}`} onClick={() => acceptTnC && confirmDetails ? generatePDF : setShowCheckboxError(true)}>
+            <button className={`${acceptTnC && confirmDetails ? "download-pdf-btn" : "download-pdf-btn-disabled"}`} onClick={acceptTnC && confirmDetails ? generatePDF :() => setShowCheckboxError(true)}>
                 Download PDF
             </button>
             {showCheckboxError && (

@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "powershell -ExecutionPolicy Bypass -File ./deploy.ps1"
   },
   "dependencies": {
     "framer-motion": "^12.23.0",
