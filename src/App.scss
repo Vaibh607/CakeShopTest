@@ -591,8 +591,8 @@ body {
                 color: white;
             }
             .display-tabs-act{
-                background-color: rgb(0, 132, 255);
-                border-bottom: 5px solid  rgb(0, 55, 255);
+                background: linear-gradient(135deg, rgb(140, 36, 255),rgb(82, 94, 255));
+                // border-bottom: 5px solid  rgb(0, 55, 255);
                 font-weight: 550;
 
             }
@@ -1305,16 +1305,49 @@ body {
         letter-spacing: 0.3px;
     }
 }
+.mandatory-checkboxes{
+    background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+    border-right: 3px solid #1d4ed8;
+    border-radius: 10px;
+    margin: 14px;
+    padding: 5px 8px;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #1e293b;
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+
+    input{
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+        border-radius: 50%;
+        border: 1px solid #1e293b;
+    }
+    span{
+        color: #1d4ed8;
+        font-weight: 500;
+        cursor: pointer;
+    }
+}
 .instruction{
     font-size: 1.2em;
     padding: 12px;
     a {
         text-decoration: none;
+        color: #1d4ed8;
+        font-weight: 500;
+    }
+    span {
+        color: #27ae60;
+        font-weight: 550;
     }
 }
 .download-pdf-btn {
   display: block;
-  margin: 20px auto;
+  margin: 0px auto 16px;
+
   padding: 12px 24px;
   background: #27ae60;
   color: white;
@@ -1325,11 +1358,44 @@ body {
   cursor: pointer;
   transition: background 0.3s;
 }
-
+.download-pdf-btn-disabled {
+  display: block;
+  margin: 0px auto 16px;
+  
+  padding: 12px 24px;
+  background: #5a5a5a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
 .download-pdf-btn:hover {
   background: #229954;
 }
 
 .download-pdf-btn:active {
   transform: translateY(1px);
+}
+.checkbox-error{
+    color: red;
+    font-size: 1.1em;
+    padding: 0px 14px;   
+}
+.payment-qr-code{
+    margin: 20px 14px;
+    .qr-code-head{
+        padding: 10px;
+        font-size: 1.25em;
+    }
+    .qr-code-image{
+        display: flex;
+        justify-content: center;
+        img{
+            width: 95%;
+            object-fit:contain;
+        }
+    }
 }

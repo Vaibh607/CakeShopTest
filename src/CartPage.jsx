@@ -5,6 +5,7 @@ import ItemDisplayCard from "./ItemDisplayCard";
 import ItemDiscription from "./ItemDiscription";
 import Minus from '../src/Images/Icons/Minus-Icon.jpg'
 import Plus from '../src/Images/Icons/Plus-Icon.jpg'
+import qrCode from '../src/Images/QR Code/Kanhaa QR.jpg'
 import jsPDF from 'jspdf';
 
 import { useState,useEffect, useMemo } from 'react';
@@ -539,6 +540,11 @@ const CartPage = ({switchPage,wishlist,toggleWishlist,cart,toggleCart,updateCart
     const [acceptTnC, setAcceptTnC] = useState(false);
     const [confirmDetails, setConfirmDetails] = useState(false);
     const [showCheckboxError, setShowCheckboxError] = useState(false);
+    useEffect(() => {
+        if (acceptTnC && confirmDetails) {
+            setShowCheckboxError(false);
+        }
+    }, [acceptTnC, confirmDetails]);
 
 
     return(
@@ -707,11 +713,11 @@ const CartPage = ({switchPage,wishlist,toggleWishlist,cart,toggleCart,updateCart
                   id="acceptTnC"
                   type="checkbox"
                   checked={acceptTnC}
-                  onChange={e => { setAcceptTnC(e.target.checked); setShowCheckboxError(false); }}
+                  onChange={e => { setAcceptTnC(e.target.checked); }}
                   required
                 />
                 <label htmlFor="acceptTnC">
-                  I have read and accept all the <a href="#/about" target="_blank" rel="noopener noreferrer">terms and conditions</a> provided in the About section.
+                  I have read and accept all the <span onClick={()=> switchPage("home", "about")}>terms and conditions</span> provided in the About section.
                 </label>
               </div>
               <div>
@@ -719,29 +725,36 @@ const CartPage = ({switchPage,wishlist,toggleWishlist,cart,toggleCart,updateCart
                   id="confirmDetails"
                   type="checkbox"
                   checked={confirmDetails}
-                  onChange={e => { setConfirmDetails(e.target.checked); setShowCheckboxError(false); }}
+                  onChange={e => { setConfirmDetails(e.target.checked);}}
                   required
                 />
                 <label htmlFor="confirmDetails">
                   I confirm all the above details entered are correct.
                 </label>
               </div>
-              {/*Pending Task: remove showCHeckboxError and implemend on check box ticked download button should appear */}
-              {showCheckboxError && (
-                <div className="checkbox-error" style={{color:'red',marginTop:'4px',fontSize:'0.9em'}}>
-                  Please check both boxes before downloading the PDF.
-                </div>
-              )}
+
             </div>
             <div className='instruction'>
-                Please fill all the above details correctly.<br/>
-                Click on download PDF button to download your order summary and send this to us on <a href="https://wa.me/7992419378/">Whatsapp: +91 7992419378 </a>
+                Click on <span> Download PDF Button </span>to download your order summary and send this to us on <a href="https://wa.me/7992419378/">Whatsapp: +91 7992419378 </a>
             </div>
-            <button className="download-pdf-btn" onClick={generatePDF}>
+            
+            <button className={`${acceptTnC && confirmDetails ? "download-pdf-btn" : "download-pdf-btn-disabled"}`} onClick={() => acceptTnC && confirmDetails ? generatePDF : setShowCheckboxError(true)}>
                 Download PDF
             </button>
-            {/* Pending Task: check box: I have accepted all the terms and conditions provided in about section */}
-            {/* add a QR code for payment */}
+            {showCheckboxError && (
+                <div className="checkbox-error">
+                    Please check both boxes before downloading the PDF.
+                </div>
+            )}
+
+            <div className='payment-qr-code'>
+                <div className='qr-code-head'>
+                    Scan and Pay: ₹{grandTotal} using QR
+                </div>
+                <div className='qr-code-image'>
+                    <img src={qrCode} alt="Payment QR Code" />
+                </div>
+            </div>
 
         </>
     )
